@@ -46,7 +46,7 @@ urlpatterns = [
     path(
         "cars/<int:pk>/toggle-driver",
         toggle_driver_assignment,
-        name="car-toggle-dirver"
+        name="car-toggle-driver"
     ),
     path("cars/create/", CarCreateView.as_view(), name="car-create"),
     path("cars/<int:pk>/update/", CarUpdateView.as_view(), name="car-update"),

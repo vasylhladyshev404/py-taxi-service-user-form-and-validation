@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Driver, Car, Manufacturer
-from .forms import CarForm
+from .forms import CarForm, DriverLicenseUpdateForm
 
 
 @login_required
@@ -116,3 +116,10 @@ def toggle_driver_assignment(request, pk):
     else:
         car.drivers.add(user)
     return redirect(reverse("taxi:car-detail", args=[pk]))
+
+
+class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Driver
+    form_class = DriverLicenseUpdateForm
+    template_name = "taxi/driver_license_form.html"
+    success_url = reverse_lazy("taxi:driver-list") 
