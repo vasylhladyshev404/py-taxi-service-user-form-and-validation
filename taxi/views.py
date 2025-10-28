@@ -92,13 +92,13 @@ class DriverDetailView(LoginRequiredMixin, generic.DetailView):
 
 class DriverCreateView(LoginRequiredMixin, generic.CreateView):
     model = Driver
-    fields = "__all__"
+    form_class = DriverCreationForm
     success_url = reverse_lazy("taxi:driver-list")
 
 
 class DriverUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Driver
-    fields = "__all__"
+    form_class = DriverLicenseUpdateForm
     success_url = reverse_lazy("taxi:driver-list")
 
 
@@ -116,10 +116,3 @@ def toggle_driver_assignment(request, pk):
     else:
         car.drivers.add(user)
     return redirect(reverse("taxi:car-detail", args=[pk]))
-
-
-class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Driver
-    form_class = DriverLicenseUpdateForm
-    template_name = "taxi/driver_license_form.html"
-    success_url = reverse_lazy("taxi:driver-list")
