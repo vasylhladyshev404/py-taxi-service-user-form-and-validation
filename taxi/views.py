@@ -122,4 +122,4 @@ class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Driver
     form_class = DriverLicenseUpdateForm
     template_name = "taxi/driver_license_form.html"
-    success_url = reverse_lazy("taxi:driver-list") 
+    success_url = reverse_lazy("taxi:driver-list")
