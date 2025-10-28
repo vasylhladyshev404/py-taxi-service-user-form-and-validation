@@ -27,7 +27,13 @@ class CarForm(forms.ModelForm):
 class DriverCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ("username", "first_name", "last_name", "email", "license_number")
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "license_number"
+        )
 
     def clean_license_number(self):
         license_number = self.cleaned_data.get("license_number")
