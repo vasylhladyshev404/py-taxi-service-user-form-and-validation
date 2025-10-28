@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from taxi.models import Driver, validate_license_number, Car
+from taxi.models import validate_license_number, Car
 
 
 class DriverLicenseUpdateForm(forms.ModelForm):
