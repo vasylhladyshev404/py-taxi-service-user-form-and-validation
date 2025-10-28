@@ -15,7 +15,11 @@ class Manufacturer(models.Model):
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(max_length=255, unique=True)
+    license_number = models.CharField(
+        max_length=255,
+        unique=True,
+        validators=[validate_license_number],
+    )
 
     class Meta:
         verbose_name = "driver"
@@ -35,3 +39,12 @@ class Car(models.Model):
 
     def __str__(self):
         return self.model
+
+
+def validate_license_number(value):
+    if len(value) != 8:
+        raise ValidationError("License number should consist 8 characters")
+    if not value[:3].isalpha() or not value[:3].isupper():
+        raise ValidationError("First 3 characters should be uppercase letters")
+    if not value[3:].isdigit():
+        raise ValidationError("Last 5 characters should be digits")
