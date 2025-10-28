@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -100,6 +100,7 @@ class DriverUpdateView(LoginRequiredMixin. generic.UpdateView):
     model = Driver
     fields = "__all__"
     success_url = reverse_lazy("taxi:driver-list")
+
 
 class DriverDeleteView(LoginRequiredMixin. generic.DeleteView):
     model = Driver
