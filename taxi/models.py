@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 
 class Manufacturer(models.Model):
@@ -12,6 +13,15 @@ class Manufacturer(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.country}"
+
+
+def validate_license_number(value):
+    if len(value) != 8:
+        raise ValidationError("License number should consist 8 characters")
+    if not value[:3].isalpha() or not value[:3].isupper():
+        raise ValidationError("First 3 characters should be uppercase letters")
+    if not value[3:].isdigit():
+        raise ValidationError("Last 5 characters should be digits")
 
 
 class Driver(AbstractUser):
@@ -39,12 +49,3 @@ class Car(models.Model):
 
     def __str__(self):
         return self.model
-
-
-def validate_license_number(value):
-    if len(value) != 8:
-        raise ValidationError("License number should consist 8 characters")
-    if not value[:3].isalpha() or not value[:3].isupper():
-        raise ValidationError("First 3 characters should be uppercase letters")
-    if not value[3:].isdigit():
-        raise ValidationError("Last 5 characters should be digits")

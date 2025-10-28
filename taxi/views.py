@@ -113,5 +113,5 @@ def toggle_driver_assignment(request, pk):
     if user in car.drivers.all():
         car.drivers.remove(user)
     else:
-        car..drivers.add(user)
+        car.drivers.add(user)
     return redirect(reverse("taxi:car-detail", args=[pk]))

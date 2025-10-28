@@ -12,7 +12,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         validate_license_number(license_number)
         return license_number
 
-    
+
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
